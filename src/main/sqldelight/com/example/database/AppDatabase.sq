@@ -1,0 +1,29 @@
+CREATE TABLE User (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    isAdmin INTEGER NOT NULL
+);
+
+CREATE TABLE Room (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    building TEXT NOT NULL,
+    roomNumber TEXT NOT NULL
+);
+
+CREATE TABLE Computer (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    roomId INTEGER NOT NULL,
+    operatingSystem TEXT NOT NULL,
+    FOREIGN KEY (roomId) REFERENCES Room(id)
+);
+
+CREATE TABLE Booking (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    userId INTEGER NOT NULL,
+    computerId INTEGER NOT NULL,
+    day TEXT NOT NULL,
+    timeSlot TEXT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES User(id),
+    FOREIGN KEY (computerId) REFERENCES Computer(id)
+);
